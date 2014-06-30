@@ -1,7 +1,7 @@
 UBRSpaceView
 ============
 
-A wrapper view that animates its subviews between two positions in a natural way. The user can interrupt the animations and manipulate the subviews at any time.
+A wrapper view that lets a user move subviews between two positions in a natural way. The transition can be animated or controlled via touch. Animations can be interrupted at any time and the control goes back to the user.
 
 Video
 -----
