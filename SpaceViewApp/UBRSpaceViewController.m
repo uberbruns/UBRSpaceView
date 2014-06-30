@@ -113,20 +113,6 @@ CGFloat   const kRectangleCornerRadius = 10;
 
 #pragma mark - Space View Delegate -
 
-- (CGRect)spaceView:(UBRSpaceView *)spaceView endFrameForSubview:(UIView *)view {
-    
-    CGRect bounds = self.view.bounds;
-    
-    CGRect rect = CGRectZero;
-    rect.origin.y = kRectangleSpacing;
-    rect.origin.x = kRectangleSpacing;
-    rect.size.width = bounds.size.width - 2 * kRectangleSpacing;
-    rect.size.height = bounds.size.height - 3 * kRectangleSpacing - kRectangleSideLength * 2;
-    return rect;
-
-}
-
-
 
 - (CGRect)spaceView:(UBRSpaceView *)spaceView startFrameForSubview:(UIView *)view {
     
@@ -143,6 +129,20 @@ CGFloat   const kRectangleCornerRadius = 10;
     
     return UBRRoundRect(rect);
     
+}
+
+
+- (CGRect)spaceView:(UBRSpaceView *)spaceView endFrameForSubview:(UIView *)view {
+    
+    CGRect bounds = self.view.bounds;
+    
+    CGRect rect = CGRectZero;
+    rect.origin.y = kRectangleSpacing;
+    rect.origin.x = kRectangleSpacing;
+    rect.size.width = bounds.size.width - 2 * kRectangleSpacing;
+    rect.size.height = bounds.size.height - 3 * kRectangleSpacing - kRectangleSideLength * 2;
+    return rect;
+
 }
 
 
