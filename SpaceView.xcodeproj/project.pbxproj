@@ -12,7 +12,6 @@
 		2A0CBDCC194DA2D7002EA470 /* SpaceViewTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A0CBDCB194DA2D7002EA470 /* SpaceViewTests.m */; };
 		2A0CBDD6194DAC9E002EA470 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A0CBDD5194DAC9E002EA470 /* QuartzCore.framework */; };
 		2A0CBDDE194DC9CE002EA470 /* UIColor+FlatColors.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A0CBDDD194DC9CE002EA470 /* UIColor+FlatColors.m */; };
-		2A31CE1D1956EA8400CFED10 /* NSObject+AssociatedObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A31CE1C1956EA8400CFED10 /* NSObject+AssociatedObject.m */; };
 		2A31CE201956F6DF00CFED10 /* UBRSpaceView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A31CE1F1956F6DF00CFED10 /* UBRSpaceView.m */; };
 		2A38059A1956F9C5005C5967 /* UIView+SpaceView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A3805991956F9C5005C5967 /* UIView+SpaceView.m */; };
 		2A38059D1957056F005C5967 /* UIGestureRecognizer+SpaceView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A38059C1957056F005C5967 /* UIGestureRecognizer+SpaceView.m */; };
@@ -49,19 +48,17 @@
 		2A0CBDCA194DA2D7002EA470 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2A0CBDCB194DA2D7002EA470 /* SpaceViewTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SpaceViewTests.m; sourceTree = "<group>"; };
 		2A0CBDD5194DAC9E002EA470 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
-		2A0CBDDC194DC9CE002EA470 /* UIColor+FlatColors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIColor+FlatColors.h"; path = "SpaceView/UIColor+FlatColors.h"; sourceTree = "<group>"; };
-		2A0CBDDD194DC9CE002EA470 /* UIColor+FlatColors.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIColor+FlatColors.m"; path = "SpaceView/UIColor+FlatColors.m"; sourceTree = "<group>"; };
-		2A31CE1B1956EA8400CFED10 /* NSObject+AssociatedObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSObject+AssociatedObject.h"; path = "SpaceView/NSObject+AssociatedObject.h"; sourceTree = "<group>"; };
-		2A31CE1C1956EA8400CFED10 /* NSObject+AssociatedObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSObject+AssociatedObject.m"; path = "SpaceView/NSObject+AssociatedObject.m"; sourceTree = "<group>"; };
-		2A31CE1E1956F6DF00CFED10 /* UBRSpaceView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UBRSpaceView.h; path = SpaceView/UBRSpaceView.h; sourceTree = "<group>"; };
-		2A31CE1F1956F6DF00CFED10 /* UBRSpaceView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UBRSpaceView.m; path = SpaceView/UBRSpaceView.m; sourceTree = "<group>"; };
-		2A3805981956F9C5005C5967 /* UIView+SpaceView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIView+SpaceView.h"; path = "SpaceView/UIView+SpaceView.h"; sourceTree = "<group>"; };
-		2A3805991956F9C5005C5967 /* UIView+SpaceView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIView+SpaceView.m"; path = "SpaceView/UIView+SpaceView.m"; sourceTree = "<group>"; };
-		2A38059C1957056F005C5967 /* UIGestureRecognizer+SpaceView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIGestureRecognizer+SpaceView.m"; path = "SpaceView/UIGestureRecognizer+SpaceView.m"; sourceTree = "<group>"; };
-		2A9A3792196016FA002FCEB7 /* UBRSpaceGeometry.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = UBRSpaceGeometry.h; path = SpaceView/UBRSpaceGeometry.h; sourceTree = "<group>"; };
-		2A9A37931960A04B002FCEB7 /* UIGestureRecognizer+SpaceView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIGestureRecognizer+SpaceView.h"; path = "SpaceView/UIGestureRecognizer+SpaceView.h"; sourceTree = "<group>"; };
-		2A9A37941960A0E3002FCEB7 /* UBRSpaceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UBRSpaceViewController.h; path = SpaceView/UBRSpaceViewController.h; sourceTree = SOURCE_ROOT; };
-		2A9A37951960A0E3002FCEB7 /* UBRSpaceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UBRSpaceViewController.m; path = SpaceView/UBRSpaceViewController.m; sourceTree = SOURCE_ROOT; };
+		2A0CBDDC194DC9CE002EA470 /* UIColor+FlatColors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+FlatColors.h"; sourceTree = "<group>"; };
+		2A0CBDDD194DC9CE002EA470 /* UIColor+FlatColors.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+FlatColors.m"; sourceTree = "<group>"; };
+		2A31CE1E1956F6DF00CFED10 /* UBRSpaceView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UBRSpaceView.h; sourceTree = "<group>"; };
+		2A31CE1F1956F6DF00CFED10 /* UBRSpaceView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UBRSpaceView.m; sourceTree = "<group>"; };
+		2A3805981956F9C5005C5967 /* UIView+SpaceView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+SpaceView.h"; sourceTree = "<group>"; };
+		2A3805991956F9C5005C5967 /* UIView+SpaceView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+SpaceView.m"; sourceTree = "<group>"; };
+		2A38059C1957056F005C5967 /* UIGestureRecognizer+SpaceView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIGestureRecognizer+SpaceView.m"; sourceTree = "<group>"; };
+		2A9A3792196016FA002FCEB7 /* UBRSpaceGeometry.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UBRSpaceGeometry.h; sourceTree = "<group>"; };
+		2A9A37931960A04B002FCEB7 /* UIGestureRecognizer+SpaceView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIGestureRecognizer+SpaceView.h"; sourceTree = "<group>"; };
+		2A9A37941960A0E3002FCEB7 /* UBRSpaceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UBRSpaceViewController.h; path = SpaceViewApp/UBRSpaceViewController.h; sourceTree = SOURCE_ROOT; };
+		2A9A37951960A0E3002FCEB7 /* UBRSpaceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UBRSpaceViewController.m; path = SpaceViewApp/UBRSpaceViewController.m; sourceTree = SOURCE_ROOT; };
 		2AE876D11960A3A400A70527 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -87,7 +84,7 @@
 		2A0CBDA6194DA2D6002EA470 = {
 			isa = PBXGroup;
 			children = (
-				2A95D931195EE5050011DAFB /* UBRSpace */,
+				2A95D931195EE5050011DAFB /* Classes */,
 				2A0CBDD8194DC925002EA470 /* Extension */,
 				2A0CBDB1194DA2D7002EA470 /* App */,
 				2A0CBDC8194DA2D7002EA470 /* SpaceViewTests */,
@@ -116,8 +113,8 @@
 				2A0CBDB2194DA2D7002EA470 /* Supporting Files */,
 			);
 			name = App;
-			path = SpaceView;
-			sourceTree = "<group>";
+			path = SpaceViewApp;
+			sourceTree = SOURCE_ROOT;
 		};
 		2A0CBDB2194DA2D7002EA470 /* Supporting Files */ = {
 			isa = PBXGroup;
@@ -158,13 +155,12 @@
 			children = (
 				2A0CBDDC194DC9CE002EA470 /* UIColor+FlatColors.h */,
 				2A0CBDDD194DC9CE002EA470 /* UIColor+FlatColors.m */,
-				2A31CE1B1956EA8400CFED10 /* NSObject+AssociatedObject.h */,
-				2A31CE1C1956EA8400CFED10 /* NSObject+AssociatedObject.m */,
 			);
 			name = Extension;
-			sourceTree = "<group>";
+			path = SpaceViewApp;
+			sourceTree = SOURCE_ROOT;
 		};
-		2A95D931195EE5050011DAFB /* UBRSpace */ = {
+		2A95D931195EE5050011DAFB /* Classes */ = {
 			isa = PBXGroup;
 			children = (
 				2A9A37931960A04B002FCEB7 /* UIGestureRecognizer+SpaceView.h */,
@@ -175,8 +171,9 @@
 				2A31CE1F1956F6DF00CFED10 /* UBRSpaceView.m */,
 				2A9A3792196016FA002FCEB7 /* UBRSpaceGeometry.h */,
 			);
-			name = UBRSpace;
-			sourceTree = "<group>";
+			name = Classes;
+			path = SpaceViewClasses;
+			sourceTree = SOURCE_ROOT;
 		};
 		2AE876D31960A3BA00A70527 /* User Interface */ = {
 			isa = PBXGroup;
@@ -290,7 +287,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				2AE876CD1960A2AC00A70527 /* UBRAppDelegate.m in Sources */,
-				2A31CE1D1956EA8400CFED10 /* NSObject+AssociatedObject.m in Sources */,
 				2A38059A1956F9C5005C5967 /* UIView+SpaceView.m in Sources */,
 				2A38059D1957056F005C5967 /* UIGestureRecognizer+SpaceView.m in Sources */,
 				2A0CBDDE194DC9CE002EA470 /* UIColor+FlatColors.m in Sources */,
@@ -420,7 +416,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				INFOPLIST_FILE = "$(SRCROOT)/SpaceView/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/SpaceViewApp/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = SpaceView;
@@ -435,7 +431,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				INFOPLIST_FILE = "$(SRCROOT)/SpaceView/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/SpaceViewApp/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = SpaceView;
