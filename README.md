@@ -1,8 +1,7 @@
 UBRSpaceView
 ============
 
-A wrapper view that animates its subviews between two positions in a natural way.
-The user can interrupt the animations and manipulate the subviews at any time.
+A wrapper view that animates its subviews between two positions in a natural way. The user can interrupt the animations and manipulate the subviews at any time.
 
 Video
 -----
@@ -18,7 +17,6 @@ Setup the space view.
 ```objective-c
 // Layout
 UBRSpaceView * spaceView = [[UBRSpaceView alloc] initWithFrame:self.view.bounds];
-spaceView.backgroundColor = [UIColor blackColor];
 spaceView.delegate = self;
 [self.view addSubview:spaceView];
 
