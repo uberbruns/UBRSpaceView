@@ -1,11 +1,12 @@
 UBRSpaceView
 ============
 
-A wrapper view that allows its subviews to animate between two positions but still stay responsive.
-The user can interrupt and manipulate these subviews at any time.
+A wrapper view that animates its subviews between two positions in a natural way.
+The user can interrupt the animations and manipulate the subviews at any time.
 
 Video
 -----
+
 * https://flic.kr/p/nSMTAs
 
 
