@@ -58,6 +58,16 @@ UBRScaleRect(CGRect minRect, CGRect maxRect, CGFloat f)
 }
 
 
+CG_INLINE CGRect
+UBRScaleRectWithFactor(CGRect rect, CGFloat scaleW, CGFloat scaleH)
+{
+    CGFloat deltaHeight = rect.size.height - (rect.size.height * scaleH);
+    CGFloat deltaWidth = rect.size.width - (rect.size.width * scaleW);
+    CGRect scaledFrame = UIEdgeInsetsInsetRect(rect, UIEdgeInsetsMake(deltaHeight/2, deltaWidth/2, deltaHeight/2, deltaWidth/2));
+    return scaledFrame;
+}
+
+
 CG_INLINE CGPoint
 UBRIntermediatePoint(CGPoint startPoint, CGPoint endPoint, CGPoint nearPoint)
 {
