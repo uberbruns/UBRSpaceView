@@ -38,7 +38,23 @@
 }
 
 
-#pragma mark - Interface -
+- (void)willRemoveSubview:(UIView *)subview
+{
+    UIGestureRecognizer *removeMe;
+    for (UIGestureRecognizer *gestureRecognizer in self.gestureRecognizers) {
+        if (gestureRecognizer.associatedView == subview) {
+            removeMe = gestureRecognizer;
+            break;
+        }
+    }
+    
+    if (removeMe) {
+        [self removeGestureRecognizer:removeMe];
+    }
+}
+
+
+#pragma mark - API -
 
 - (void)controlSubview:(UIView *)subview options:(UBRSpaceViewOptions)options
 {
@@ -71,29 +87,11 @@
 }
 
 
-#pragma mark - Subview Handling -
-
-
-- (void)willRemoveSubview:(UIView *)subview
-{
-    UIGestureRecognizer *removeMe;
-    for (UIGestureRecognizer *gestureRecognizer in self.gestureRecognizers) {
-        if (gestureRecognizer.associatedView == subview) {
-            removeMe = gestureRecognizer;
-            break;
-        }
-    }
-    
-    if (removeMe) {
-        [self removeGestureRecognizer:removeMe];
-    }
-}
-
+#pragma mark - Subviews -
+#pragma mark Update
 
 - (void)updateSubview:(UIView *)subview
 {
-    // NSLog(@"%s", __PRETTY_FUNCTION__);
-    
     CGRect nextFrame;
     CGFloat progress = 0;
     
@@ -114,8 +112,6 @@
 
 - (void)updateSubview:(UIView *)subview animated:(BOOL)animated
 {
-    // NSLog(@"%s", __PRETTY_FUNCTION__);
-    
     // Not Animated?
     if (!animated) {
         [self updateSubview:subview];
@@ -126,7 +122,7 @@
     }
     
     // Animation Setup
-    UIViewAnimationOptions options = UIViewAnimationOptionAllowUserInteraction;
+    UIViewAnimationOptions options = UIViewAnimationOptionAllowUserInteraction | UIViewAnimationOptionAllowAnimatedContent;
     CGFloat damping = self.damping;
     CGFloat velocity = self.velocity;
     CGFloat duration = self.duration;
@@ -147,7 +143,7 @@
         CGFloat distance = 1.0;
         durationFactor = [self progressForSubview:subview];
         durationFactor = fmaxf(durationFactor, 0.5);
-//
+
         if (subview.svInfo.thePosition == UBRSpaceViewPositionStart) {
             nextFrame = startFrame;
         } else {
@@ -161,7 +157,7 @@
         if (velocity > 15 || velocity < 0) {
             velocity = self.velocity;
         }
-//
+        
         velocity *= durationFactor;
         
     }
@@ -197,6 +193,16 @@
 }
 
 
+#pragma mark Update / Progress
+
+- (CGFloat)progressForSubview:(UIView *)subview
+{
+    CGRect minRect = [self.delegate spaceView:self startFrameForSubview:subview];
+    CGRect maxRect = [self.delegate spaceView:self endFrameForSubview:subview direction:subview.svInfo.direction];
+    CGPoint currentPosition = [subview.layer.presentationLayer position];
+    return UBRProgressBetweenRects(minRect, maxRect, currentPosition);;
+}
+
 
 #pragma mark - Gesture Handling -
 #pragma mark Pan Gesture
@@ -216,13 +222,13 @@
         // we can calculate the inner offset at the beginning and save
         // it as relative value to the current subview size
         CGRect frame = [subview.layer.presentationLayer frame];
-        CGPoint offsetTouchLocationToCenter = [panGesture locationInView:self];
         CGPoint subviewLocation = UBRCenterForRect(frame);
-        offsetTouchLocationToCenter.x -= subviewLocation.x;
-        offsetTouchLocationToCenter.y -= subviewLocation.y;
-        offsetTouchLocationToCenter.x /= frame.size.width;
-        offsetTouchLocationToCenter.y /= frame.size.height;
-        subview.svInfo.offsetTouchLocationToCenter = offsetTouchLocationToCenter;
+        CGPoint innerTouchLocationRelativeToCenter = [panGesture locationInView:self];
+        innerTouchLocationRelativeToCenter.x -= subviewLocation.x;
+        innerTouchLocationRelativeToCenter.y -= subviewLocation.y;
+        innerTouchLocationRelativeToCenter.x /= frame.size.width; // Make value realtive to size
+        innerTouchLocationRelativeToCenter.y /= frame.size.height;
+        subview.svInfo.innerTouchLocationRelativeToCenter = innerTouchLocationRelativeToCenter;
         
         // Start Location
         if (!subview.svInfo.inTransition) {
@@ -256,9 +262,9 @@
 
     } else if (panGesture.state == UIGestureRecognizerStateChanged) {
         
-        CGPoint startLocation = subview.svInfo.startLocation;
-        CGPoint current = [panGesture locationInView:subview.superview];
-        CGFloat angle = UBRAngleBetweenPoints(startLocation, current);
+        CGPoint startingTouchLocation = subview.svInfo.startLocation;
+        CGPoint currentTouchLocation = [panGesture locationInView:subview.superview];
+        CGFloat angle = UBRAngleBetweenPoints(startingTouchLocation, currentTouchLocation);
         UBRSpaceViewDirection direction = UBRSpaceViewDirectionUnknown;
 
         if (angle >= -4*M_PI_4 && angle < -3*M_PI_4) {
@@ -280,19 +286,17 @@
         }
 
         CGRect frame = [subview.layer.presentationLayer frame];
-        CGPoint offsetTouchLocationToCenter = subview.svInfo.offsetTouchLocationToCenter;
-        current.x -= (offsetTouchLocationToCenter.x *frame.size.width);
-        current.y -= (offsetTouchLocationToCenter.y *frame.size.height);
+        CGPoint innerTouchLocationRelativeToCenter = subview.svInfo.innerTouchLocationRelativeToCenter;
+        currentTouchLocation.x -= (innerTouchLocationRelativeToCenter.x * frame.size.width);
+        currentTouchLocation.y -= (innerTouchLocationRelativeToCenter.y * frame.size.height);
         
         CGRect  startRect = [self.delegate spaceView:self startFrameForSubview:subview];
         CGRect  endRect   = [self.delegate spaceView:self endFrameForSubview:subview direction:direction];
-        CGFloat progress  = UBRProgressBetweenRects(startRect, endRect, current);
+        CGFloat progress  = UBRProgressBetweenRects(startRect, endRect, currentTouchLocation);
         subview.svInfo.progress = progress;
         subview.svInfo.direction = direction;
         
-        // NSLog(@"Setting Frame In: %s", __PRETTY_FUNCTION__);
-        
-        [UIView animateWithDuration:(1.0 / 60.0) *4.0 delay:0.0 options:UIViewAnimationOptionAllowUserInteraction animations:^{
+        [UIView animateWithDuration:(1.0 / 60.0) * 4.0 delay:0.0 options:UIViewAnimationOptionAllowUserInteraction animations:^{
             subview.layer.frame = UBRScaleRect(startRect, endRect, progress);
             if ([self.delegate respondsToSelector:@selector(spaceView:subviewIsMoving:progress:direction:)]) {
                 [self.delegate spaceView:self subviewIsMoving:subview progress:progress direction:subview.svInfo.direction];
@@ -302,8 +306,6 @@
     }
 }
 
-
-#pragma mark Delegate
 
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch
 {
@@ -324,17 +326,6 @@
     return false;
 }
 
-
-#pragma mark - Helper -
-#pragma mark Progress
-
-- (CGFloat)progressForSubview:(UIView *)subview
-{
-    CGRect minRect = [self.delegate spaceView:self startFrameForSubview:subview];
-    CGRect maxRect = [self.delegate spaceView:self endFrameForSubview:subview direction:subview.svInfo.direction];
-    CGPoint currentPosition = [subview.layer.presentationLayer position];
-    return UBRProgressBetweenRects(minRect, maxRect, currentPosition);;
-}
 
 
 @end

@@ -14,7 +14,6 @@ UBRDistance(CGPoint point1, CGPoint point2)
     CGFloat xDist = (point2.x - point1.x);
     CGFloat yDist = (point2.y - point1.y);
     return sqrt((xDist * xDist) + (yDist * yDist));
-    
 }
 
 
@@ -25,6 +24,7 @@ UBRAngleBetweenPoints(CGPoint a, CGPoint b)
     CGFloat dy = b.y - a.y;
     return atan2(-dx,dy);
 }
+
 
 CG_INLINE CGPoint
 UBRCenterForRect(CGRect rect)
@@ -38,8 +38,8 @@ UBRCenterForRect(CGRect rect)
 CG_INLINE CGRect
 UBRRoundRect(CGRect rect)
 {
-    rect.origin.x = rect.origin.x;
-    rect.origin.y = rect.origin.y;
+    rect.origin.x = roundf(rect.origin.x);
+    rect.origin.y = roundf(rect.origin.y);
     rect.size.width = roundf(rect.size.width);
     rect.size.height = roundf(rect.size.height);
     return rect;

@@ -39,7 +39,7 @@ typedef NS_OPTIONS(NSUInteger, UBRSpaceViewDirection) {
 @property (nonatomic, assign) UIPanGestureRecognizer * activeGesture;
 @property (nonatomic, assign) UBRSpaceViewPosition thePosition;
 @property (nonatomic, assign) UBRSpaceViewDirection direction;
-@property (nonatomic, assign) CGPoint offsetTouchLocationToCenter;
+@property (nonatomic, assign) CGPoint innerTouchLocationRelativeToCenter;
 @property (nonatomic, assign) CGPoint startLocation;
 @property (nonatomic, assign) CGFloat progress;
 @property (nonatomic, assign) BOOL inTransition;
