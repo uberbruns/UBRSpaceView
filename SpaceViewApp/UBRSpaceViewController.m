@@ -81,9 +81,9 @@ CGFloat   const kRectangleCornerRadius = 10;
     UBRSpaceView *spaceView = [[UBRSpaceView alloc] initWithFrame:self.view.bounds];
     spaceView.backgroundColor = [UIColor blackColor];
     spaceView.delegate = self;
-    spaceView.duration = 0.6;
+    spaceView.duration = 0.4f;
     spaceView.damping = 3;
-    spaceView.velocity = 6;
+    spaceView.velocity = 10;
     [self.view addSubview:spaceView];
     
     // Layout Rectangles and Placeholder Views
@@ -97,13 +97,15 @@ CGFloat   const kRectangleCornerRadius = 10;
         movableView.backgroundColor = [colors[i] colorWithAlphaComponent:0.85];
         movableView.layer.borderColor = [colors[i] CGColor];
         movableView.layer.borderWidth = 1;
+//        movableView.layer.allowsEdgeAntialiasing = true;
+//        movableView.layer.edgeAntialiasingMask = kCALayerBottomEdge | kCALayerTopEdge | kCALayerLeftEdge | kCALayerRightEdge;
         [self.bottomViews addObject:movableView];
         [spaceView addSubview:movableView];
         [spaceView controlSubview:movableView options:UBRSpaceViewOptionsDraggable];
         
-        UITapGestureRecognizer *rectangleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapGestureHandler:)];
-        rectangleTap.associatedView = movableView;
-        [movableView addGestureRecognizer:rectangleTap];
+//        UITapGestureRecognizer *rectangleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapGestureHandler:)];
+//        rectangleTap.associatedView = movableView;
+//        [movableView addGestureRecognizer:rectangleTap];
         
         // Layout Placeholder
         UIView *placeholderView = [[UIView alloc] init];
@@ -173,11 +175,22 @@ CGFloat   const kRectangleCornerRadius = 10;
     return UBRRoundRect(rect);
 }
 
+
+- (CGRect)bottomOutsideFrameForView:(UBRMovableView *)movableView
+{
+    CGRect rect = [self bottomFrameForView:movableView];
+    rect.origin.y = self.view.bounds.size.height + rect.size.height;
+    return UBRRoundRect(rect);
+}
+
+
 #pragma mark - Gesture Handling -
 
 - (void)tapGestureHandler:(UITapGestureRecognizer *)tapGesture
 {
-    [self.spaceView toggleSubviewPosition:tapGesture.associatedView animated:true];
+    [self.topViews removeObject:tapGesture.associatedView];
+    [self.bottomViews addObject:tapGesture.associatedView];
+    [self.spaceView setSubviewPosition:tapGesture.associatedView position:UBRSpaceViewPositionStart animated:true];
 }
 
 
@@ -195,7 +208,7 @@ CGFloat   const kRectangleCornerRadius = 10;
 }
 
 
-- (CGRect)spaceView:(UBRSpaceView *)spaceView endFrameForSubview:(UIView *)view inDirection:(UBRSpaceViewDirection)direction
+- (CGRect)spaceView:(UBRSpaceView *)spaceView endFrameForSubview:(UIView *)view direction:(UBRSpaceViewDirection)direction
 {
     UBRMovableView *movableView = (id)view;
     if ([self viewIsTopView:movableView]) {
@@ -205,12 +218,16 @@ CGFloat   const kRectangleCornerRadius = 10;
             return [self bottomFrameForView:movableView];
         }
     } else {
-        return [self topFrameForView:movableView];
+        if (direction & UBRSpaceViewDirectionBottomHalf) {
+            return [self bottomOutsideFrameForView:movableView];
+        } else {
+            return [self topFrameForView:movableView];
+        }
     }
 }
 
 
-- (void)spaceView:(UBRSpaceView *)spaceView adjustSubview:(UIView *)view progress:(CGFloat)progress
+- (void)spaceView:(UBRSpaceView *)spaceView adjustSubview:(UIView *)view progress:(CGFloat)progress direction:(UBRSpaceViewDirection)direction
 {
     UBRMovableView *movableView = (id)view;
     CGFloat factor = fabsf(progress-1);
@@ -223,7 +240,7 @@ CGFloat   const kRectangleCornerRadius = 10;
 }
 
 
-- (void)spaceView:(UBRSpaceView *)spaceView subview:(UIView *)subview willTransitFromPosition:(UBRSpaceViewPosition)position
+- (void)spaceView:(UBRSpaceView *)spaceView subview:(UIView *)subview willTransitFromPosition:(UBRSpaceViewPosition)position direction:(UBRSpaceViewDirection)direction
 {
     if (position == UBRSpaceViewPositionStart) {
         [spaceView bringSubviewToFront:subview];
@@ -231,18 +248,30 @@ CGFloat   const kRectangleCornerRadius = 10;
 }
 
 
-- (void)spaceView:(UBRSpaceView *)spaceView subview:(UIView *)subview didTransitToPosition:(UBRSpaceViewPosition)position
+- (void)spaceView:(UBRSpaceView *)spaceView subview:(UIView *)subview didTransitToPosition:(UBRSpaceViewPosition)position direction:(UBRSpaceViewDirection)direction
 {
     if (position == UBRSpaceViewPositionEnd) {
         
         UBRMovableView *movableView = (id)subview;
 
         if ([self viewIsBottomView:movableView]) {
-            [self.bottomViews removeObject:movableView];
-            [self.topViews addObject:movableView];
+            
+            if (direction & UBRSpaceViewDirectionBottomHalf) {
+                [self.bottomViews removeObject:movableView];
+            } else {
+                [self.bottomViews removeObject:movableView];
+                [self.topViews addObject:movableView];
+            }
+            
         } else if ([self viewIsTopView:movableView]) {
-            [self.topViews removeObject:movableView];
-            [self.bottomViews addObject:movableView];
+
+            if (direction & UBRSpaceViewDirectionTopHalf) {
+                [self.topViews removeObject:movableView];
+            } else {
+                [self.topViews removeObject:movableView];
+                [self.bottomViews addObject:movableView];
+            }
+            
         }
     }
 }

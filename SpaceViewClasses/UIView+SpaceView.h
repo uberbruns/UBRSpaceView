@@ -16,7 +16,7 @@ typedef NS_ENUM(NSUInteger, UBRSpaceViewPosition) {
 };
 
 typedef NS_OPTIONS(NSUInteger, UBRSpaceViewDirection) {
-    UBRSpaceViewDirectionnUnknown      = 1 << 0,
+    UBRSpaceViewDirectionUnknown       = 1 << 0,
     UBRSpaceViewDirectionTopHalf       = 1 << 1,
     UBRSpaceViewDirectionBottomHalf    = 1 << 2,
     UBRSpaceViewDirectionLeftHalf      = 1 << 3,
@@ -37,11 +37,12 @@ typedef NS_OPTIONS(NSUInteger, UBRSpaceViewDirection) {
 @interface UBRSpaceViewInfo : NSObject
 
 @property (nonatomic, assign) UIPanGestureRecognizer * activeGesture;
-@property (nonatomic, assign) UBRSpaceViewPosition fromPosition;
+@property (nonatomic, assign) UBRSpaceViewPosition thePosition;
 @property (nonatomic, assign) UBRSpaceViewDirection direction;
 @property (nonatomic, assign) CGPoint offsetTouchLocationToCenter;
 @property (nonatomic, assign) CGPoint startLocation;
 @property (nonatomic, assign) CGFloat progress;
+@property (nonatomic, assign) BOOL inTransition;
 @property (readonly) UBRSpaceViewPosition positionByProgressChange;
 
 @end

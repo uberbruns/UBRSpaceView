@@ -22,7 +22,6 @@ typedef NS_OPTIONS(NSUInteger, UBRSpaceViewOptions) {
 @interface UBRSpaceView : UIView
 
 - (void)controlSubview:(UIView *)subview options:(UBRSpaceViewOptions)options;
-- (void)toggleSubviewPosition:(UIView *)subview animated:(BOOL)animated;
 - (void)setSubviewPosition:(UIView *)subview position:(UBRSpaceViewPosition)position animated:(BOOL)animated;
 
 @property (nonatomic, weak) id <UBRSpaceViewDelegate> delegate;
@@ -37,13 +36,13 @@ typedef NS_OPTIONS(NSUInteger, UBRSpaceViewOptions) {
 @protocol UBRSpaceViewDelegate <NSObject>
 
 - (CGRect)spaceView:(UBRSpaceView*)spaceView startFrameForSubview:(UIView *)subview;
-- (CGRect)spaceView:(UBRSpaceView*)spaceView endFrameForSubview:(UIView *)subview inDirection:(UBRSpaceViewDirection)direction;
+- (CGRect)spaceView:(UBRSpaceView*)spaceView endFrameForSubview:(UIView *)subview direction:(UBRSpaceViewDirection)direction;
 
 @optional
 
-- (void)spaceView:(UBRSpaceView*)spaceView adjustSubview:(UIView *)subview progress:(CGFloat)progress;
-- (void)spaceView:(UBRSpaceView*)spaceView subview:(UIView *)subview didTransitToPosition:(UBRSpaceViewPosition)position;
-- (void)spaceView:(UBRSpaceView*)spaceView subview:(UIView *)subview willTransitFromPosition:(UBRSpaceViewPosition)position;
+- (void)spaceView:(UBRSpaceView*)spaceView adjustSubview:(UIView *)subview progress:(CGFloat)progress direction:(UBRSpaceViewDirection)direction;
+- (void)spaceView:(UBRSpaceView*)spaceView subview:(UIView *)subview didTransitToPosition:(UBRSpaceViewPosition)position direction:(UBRSpaceViewDirection)direction;
+- (void)spaceView:(UBRSpaceView*)spaceView subview:(UIView *)subview willTransitFromPosition:(UBRSpaceViewPosition)position direction:(UBRSpaceViewDirection)direction;
 
 @end
 
