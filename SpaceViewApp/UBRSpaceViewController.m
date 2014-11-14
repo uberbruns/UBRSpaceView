@@ -81,9 +81,9 @@ CGFloat   const kRectangleCornerRadius = 10;
     UBRSpaceView *spaceView = [[UBRSpaceView alloc] initWithFrame:self.view.bounds];
     spaceView.backgroundColor = [UIColor blackColor];
     spaceView.delegate = self;
-    spaceView.duration = 0.4f;
+    spaceView.duration = 0.5f;
     spaceView.damping = 3;
-    spaceView.velocity = 10;
+    spaceView.velocity = 5;
     [self.view addSubview:spaceView];
     
     // Layout Rectangles and Placeholder Views
@@ -227,7 +227,7 @@ CGFloat   const kRectangleCornerRadius = 10;
 }
 
 
-- (void)spaceView:(UBRSpaceView *)spaceView adjustSubview:(UIView *)view progress:(CGFloat)progress direction:(UBRSpaceViewDirection)direction
+- (void)spaceView:(UBRSpaceView *)spaceView subviewIsMoving:(UIView *)view progress:(CGFloat)progress direction:(UBRSpaceViewDirection)direction
 {
     UBRMovableView *movableView = (id)view;
     CGFloat factor = fabsf(progress-1);
@@ -240,15 +240,15 @@ CGFloat   const kRectangleCornerRadius = 10;
 }
 
 
-- (void)spaceView:(UBRSpaceView *)spaceView subview:(UIView *)subview willTransitFromPosition:(UBRSpaceViewPosition)position direction:(UBRSpaceViewDirection)direction
+- (void)spaceView:(UBRSpaceView *)spaceView subview:(UIView *)subview willTransitFromPosition:(UBRSpaceViewPosition)position
 {
-    if (position == UBRSpaceViewPositionStart) {
+    if ([self viewIsBottomView:(UBRMovableView *)subview]) {
         [spaceView bringSubviewToFront:subview];
     }
 }
 
 
-- (void)spaceView:(UBRSpaceView *)spaceView subview:(UIView *)subview didTransitToPosition:(UBRSpaceViewPosition)position direction:(UBRSpaceViewDirection)direction
+- (void)spaceView:(UBRSpaceView *)spaceView subviewDidMove:(UIView *)subview toPosition:(UBRSpaceViewPosition)position direction:(UBRSpaceViewDirection)direction
 {
     if (position == UBRSpaceViewPositionEnd) {
         

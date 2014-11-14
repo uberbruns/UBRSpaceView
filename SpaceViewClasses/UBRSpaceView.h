@@ -40,9 +40,9 @@ typedef NS_OPTIONS(NSUInteger, UBRSpaceViewOptions) {
 
 @optional
 
-- (void)spaceView:(UBRSpaceView*)spaceView adjustSubview:(UIView *)subview progress:(CGFloat)progress direction:(UBRSpaceViewDirection)direction;
-- (void)spaceView:(UBRSpaceView*)spaceView subview:(UIView *)subview didTransitToPosition:(UBRSpaceViewPosition)position direction:(UBRSpaceViewDirection)direction;
-- (void)spaceView:(UBRSpaceView*)spaceView subview:(UIView *)subview willTransitFromPosition:(UBRSpaceViewPosition)position direction:(UBRSpaceViewDirection)direction;
+- (void)spaceView:(UBRSpaceView*)spaceView subviewIsMoving:(UIView *)subview progress:(CGFloat)progress direction:(UBRSpaceViewDirection)direction;
+- (void)spaceView:(UBRSpaceView*)spaceView subviewDidMove:(UIView *)subview toPosition:(UBRSpaceViewPosition)position direction:(UBRSpaceViewDirection)direction;
+- (void)spaceView:(UBRSpaceView*)spaceView subviewWillMove:(UIView *)subview;
 
 @end
 

@@ -60,8 +60,8 @@
     if (position != subview.svInfo.thePosition) {
 
         // Call Delegate
-        if ([self.delegate respondsToSelector:@selector(spaceView:subview:willTransitFromPosition:direction:)]) {
-            [self.delegate spaceView:self subview:subview willTransitFromPosition:subview.svInfo.thePosition direction:subview.svInfo.direction];
+        if ([self.delegate respondsToSelector:@selector(spaceView:subviewWillMove:)]) {
+            [self.delegate spaceView:self subviewWillMove:subview];
         }
 
         // Set And Update
@@ -88,7 +88,7 @@
     }
 
     if ([self.delegate respondsToSelector:@selector(spaceView:adjustSubview:progress:direction:)]) {
-        [self.delegate spaceView:self adjustSubview:subview progress:progress direction:subview.svInfo.direction];
+        [self.delegate spaceView:self subviewIsMoving:subview progress:progress direction:subview.svInfo.direction];
     }
     
     subview.frame = nextFrame;
@@ -103,7 +103,7 @@
     if (!animated) {
         [self updateSubview:subview];
         if ([self.delegate respondsToSelector:@selector(spaceView:subview:didTransitToPosition:direction:)]) {
-            [self.delegate spaceView:self subview:subview didTransitToPosition:subview.svInfo.thePosition direction:subview.svInfo.direction];
+            [self.delegate spaceView:self subviewDidMove:subview toPosition:subview.svInfo.thePosition direction:subview.svInfo.direction];
         }
         return;
     }
@@ -169,11 +169,11 @@
                          if (finished && [self.delegate respondsToSelector:@selector(spaceView:subview:didTransitToPosition:direction:)]) {
                              CGRect currentFrame = [subview.layer.presentationLayer frame];
                              if (CGRectEqualToRect(currentFrame, startFrame)) {
-                                 [self.delegate spaceView:self subview:subview didTransitToPosition:UBRSpaceViewPositionStart direction:subview.svInfo.direction];
+                                 [self.delegate spaceView:self subviewDidMove:subview toPosition:UBRSpaceViewPositionStart direction:subview.svInfo.direction];
                                  subview.svInfo.inTransition = false;
                              } else if (CGRectEqualToRect(currentFrame, endFrame)) {
                                  subview.svInfo.inTransition = false;
-                                 [self.delegate spaceView:self subview:subview didTransitToPosition:UBRSpaceViewPositionEnd direction:subview.svInfo.direction];
+                                 [self.delegate spaceView:self subviewDidMove:subview toPosition:UBRSpaceViewPositionEnd direction:subview.svInfo.direction];
                              }
                          }
                      }];
@@ -191,8 +191,8 @@
     if (panGesture.state == UIGestureRecognizerStateBegan) {
         
         // Call Delegate
-        if ([self.delegate respondsToSelector:@selector(spaceView:subview:willTransitFromPosition:direction:)]) {
-            [self.delegate spaceView:self subview:subview willTransitFromPosition:subview.svInfo.thePosition direction:subview.svInfo.direction];
+        if ([self.delegate respondsToSelector:@selector(spaceView:subviewWillMove:)]) {
+            [self.delegate spaceView:self subviewWillMove:subview];
         }
 
         // Based upon the frame in the superview and the presentation layer,
@@ -275,10 +275,12 @@
         
         // NSLog(@"Setting Frame In: %s", __PRETTY_FUNCTION__);
         
-        subview.layer.frame = UBRScaleRect(startRect, endRect, progress);
-        if ([self.delegate respondsToSelector:@selector(spaceView:adjustSubview:progress:direction:)]) {
-            [self.delegate spaceView:self adjustSubview:subview progress:progress direction:subview.svInfo.direction];
-        }
+        [UIView animateWithDuration:(1.0 / 60.0) * 4.0 delay:0.0 options:UIViewAnimationOptionAllowUserInteraction animations:^{
+            subview.layer.frame = UBRScaleRect(startRect, endRect, progress);
+            if ([self.delegate respondsToSelector:@selector(spaceView:adjustSubview:progress:direction:)]) {
+                [self.delegate spaceView:self subviewIsMoving:subview progress:progress direction:subview.svInfo.direction];
+            }
+        } completion:nil];
         
     }
 }
