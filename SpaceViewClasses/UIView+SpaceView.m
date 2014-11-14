@@ -30,9 +30,9 @@
 - (void)setProgress:(CGFloat)value {
     if (fabsf(value - _progress) > 0.01) {
         if (value < _progress) {
-            _progressDirection = UBRSpaceViewPositionStart;
+            _positionByProgressChange = UBRSpaceViewPositionStart;
         } else {
-            _progressDirection = UBRSpaceViewPositionEnd;
+            _positionByProgressChange = UBRSpaceViewPositionEnd;
         }
     }
     _progress = value;

@@ -36,8 +36,8 @@ typedef NS_OPTIONS(NSUInteger, UBRSpaceViewOptions) {
 
 @protocol UBRSpaceViewDelegate <NSObject>
 
-- (CGRect)spaceView:(UBRSpaceView*)spaceView endFrameForSubview:(UIView *)subview;
 - (CGRect)spaceView:(UBRSpaceView*)spaceView startFrameForSubview:(UIView *)subview;
+- (CGRect)spaceView:(UBRSpaceView*)spaceView endFrameForSubview:(UIView *)subview inDirection:(UBRSpaceViewDirection)direction;
 
 @optional
 

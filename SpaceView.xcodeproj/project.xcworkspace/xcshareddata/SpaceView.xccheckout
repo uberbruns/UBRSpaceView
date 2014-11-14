@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>4175CC9E-90D8-4B16-AD79-32C736A75950</string>
+	<key>IDESourceControlProjectName</key>
+	<string>SpaceView</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>3B078A92B85744931702ED8255FB9F52E986EC0B</key>
+		<string>https://github.com/uberbruns/UBRSpaceView.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>SpaceView.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>3B078A92B85744931702ED8255FB9F52E986EC0B</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/uberbruns/UBRSpaceView.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>3B078A92B85744931702ED8255FB9F52E986EC0B</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>3B078A92B85744931702ED8255FB9F52E986EC0B</string>
+			<key>IDESourceControlWCCName</key>
+			<string>UBRSpaceView</string>
+		</dict>
+	</array>
+</dict>
+</plist>

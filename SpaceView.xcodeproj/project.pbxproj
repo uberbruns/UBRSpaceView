@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		2A0CBDB5194DA2D7002EA470 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A0CBDB4194DA2D7002EA470 /* main.m */; };
 		2A0CBDC0194DA2D7002EA470 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2A0CBDBF194DA2D7002EA470 /* Images.xcassets */; };
-		2A0CBDCC194DA2D7002EA470 /* SpaceViewTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A0CBDCB194DA2D7002EA470 /* SpaceViewTests.m */; };
 		2A0CBDD6194DAC9E002EA470 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A0CBDD5194DAC9E002EA470 /* QuartzCore.framework */; };
 		2A0CBDDE194DC9CE002EA470 /* UIColor+FlatColors.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A0CBDDD194DC9CE002EA470 /* UIColor+FlatColors.m */; };
 		2A31CE201956F6DF00CFED10 /* UBRSpaceView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A31CE1F1956F6DF00CFED10 /* UBRSpaceView.m */; };
@@ -20,23 +19,6 @@
 		2AE876D21960A3A400A70527 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2AE876D01960A3A400A70527 /* Main.storyboard */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXContainerItemProxy section */
-		2A0CBDC6194DA2D7002EA470 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 2A0CBDA7194DA2D6002EA470 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 2A0CBDAE194DA2D7002EA470;
-			remoteInfo = animation;
-		};
-		2A5103671960A7DA0065BDAF /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 2A0CBDA7194DA2D6002EA470 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 2A0CBDAE194DA2D7002EA470;
-			remoteInfo = SpaceView;
-		};
-/* End PBXContainerItemProxy section */
-
 /* Begin PBXFileReference section */
 		2A0CBDAF194DA2D7002EA470 /* SpaceView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpaceView.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2A0CBDB3194DA2D7002EA470 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -44,9 +26,6 @@
 		2A0CBDB6194DA2D7002EA470 /* UBRAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UBRAppDelegate.h; sourceTree = "<group>"; };
 		2A0CBDB7194DA2D7002EA470 /* UBRAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UBRAppDelegate.m; sourceTree = "<group>"; };
 		2A0CBDBF194DA2D7002EA470 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		2A0CBDC5194DA2D7002EA470 /* SpaceViewTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SpaceViewTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		2A0CBDCA194DA2D7002EA470 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		2A0CBDCB194DA2D7002EA470 /* SpaceViewTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SpaceViewTests.m; sourceTree = "<group>"; };
 		2A0CBDD5194DAC9E002EA470 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		2A0CBDDC194DC9CE002EA470 /* UIColor+FlatColors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+FlatColors.h"; sourceTree = "<group>"; };
 		2A0CBDDD194DC9CE002EA470 /* UIColor+FlatColors.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+FlatColors.m"; sourceTree = "<group>"; };
@@ -71,13 +50,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		2A0CBDC2194DA2D7002EA470 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -87,7 +59,6 @@
 				2A95D931195EE5050011DAFB /* Classes */,
 				2A0CBDD8194DC925002EA470 /* Extension */,
 				2A0CBDB1194DA2D7002EA470 /* App */,
-				2A0CBDC8194DA2D7002EA470 /* SpaceViewTests */,
 				2A0CBDD7194DC908002EA470 /* Frameworks */,
 				2A0CBDB0194DA2D7002EA470 /* Products */,
 			);
@@ -97,7 +68,6 @@
 			isa = PBXGroup;
 			children = (
 				2A0CBDAF194DA2D7002EA470 /* SpaceView.app */,
-				2A0CBDC5194DA2D7002EA470 /* SpaceViewTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -121,23 +91,6 @@
 			children = (
 				2A0CBDB3194DA2D7002EA470 /* Info.plist */,
 				2A0CBDB4194DA2D7002EA470 /* main.m */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		2A0CBDC8194DA2D7002EA470 /* SpaceViewTests */ = {
-			isa = PBXGroup;
-			children = (
-				2A0CBDCB194DA2D7002EA470 /* SpaceViewTests.m */,
-				2A0CBDC9194DA2D7002EA470 /* Supporting Files */,
-			);
-			path = SpaceViewTests;
-			sourceTree = "<group>";
-		};
-		2A0CBDC9194DA2D7002EA470 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				2A0CBDCA194DA2D7002EA470 /* Info.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -204,25 +157,6 @@
 			productReference = 2A0CBDAF194DA2D7002EA470 /* SpaceView.app */;
 			productType = "com.apple.product-type.application";
 		};
-		2A0CBDC4194DA2D7002EA470 /* SpaceViewTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 2A0CBDD2194DA2D7002EA470 /* Build configuration list for PBXNativeTarget "SpaceViewTests" */;
-			buildPhases = (
-				2A0CBDC1194DA2D7002EA470 /* Sources */,
-				2A0CBDC2194DA2D7002EA470 /* Frameworks */,
-				2A0CBDC3194DA2D7002EA470 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				2A0CBDC7194DA2D7002EA470 /* PBXTargetDependency */,
-				2A5103681960A7DA0065BDAF /* PBXTargetDependency */,
-			);
-			name = SpaceViewTests;
-			productName = animationTests;
-			productReference = 2A0CBDC5194DA2D7002EA470 /* SpaceViewTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -236,10 +170,6 @@
 					2A0CBDAE194DA2D7002EA470 = {
 						CreatedOnToolsVersion = 6.0;
 						DevelopmentTeam = MVV99M56UM;
-					};
-					2A0CBDC4194DA2D7002EA470 = {
-						CreatedOnToolsVersion = 6.0;
-						TestTargetID = 2A0CBDAE194DA2D7002EA470;
 					};
 				};
 			};
@@ -257,7 +187,6 @@
 			projectRoot = "";
 			targets = (
 				2A0CBDAE194DA2D7002EA470 /* SpaceView */,
-				2A0CBDC4194DA2D7002EA470 /* SpaceViewTests */,
 			);
 		};
 /* End PBXProject section */
@@ -269,13 +198,6 @@
 			files = (
 				2A0CBDC0194DA2D7002EA470 /* Images.xcassets in Resources */,
 				2AE876D21960A3A400A70527 /* Main.storyboard in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		2A0CBDC3194DA2D7002EA470 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -296,28 +218,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		2A0CBDC1194DA2D7002EA470 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				2A0CBDCC194DA2D7002EA470 /* SpaceViewTests.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		2A0CBDC7194DA2D7002EA470 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 2A0CBDAE194DA2D7002EA470 /* SpaceView */;
-			targetProxy = 2A0CBDC6194DA2D7002EA470 /* PBXContainerItemProxy */;
-		};
-		2A5103681960A7DA0065BDAF /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 2A0CBDAE194DA2D7002EA470 /* SpaceView */;
-			targetProxy = 2A5103671960A7DA0065BDAF /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		2AE876D01960A3A400A70527 /* Main.storyboard */ = {
@@ -439,44 +340,6 @@
 			};
 			name = Release;
 		};
-		2A0CBDD3194DA2D7002EA470 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/SpaceView.app/SpaceView";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = animationTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				METAL_ENABLE_DEBUG_INFO = YES;
-				PRODUCT_NAME = SpaceViewTests;
-				TEST_HOST = "$(BUNDLE_LOADER)";
-			};
-			name = Debug;
-		};
-		2A0CBDD4194DA2D7002EA470 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/SpaceView.app/SpaceView";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = animationTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				METAL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_NAME = SpaceViewTests;
-				TEST_HOST = "$(BUNDLE_LOADER)";
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -494,15 +357,6 @@
 			buildConfigurations = (
 				2A0CBDD0194DA2D7002EA470 /* Debug */,
 				2A0CBDD1194DA2D7002EA470 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		2A0CBDD2194DA2D7002EA470 /* Build configuration list for PBXNativeTarget "SpaceViewTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				2A0CBDD3194DA2D7002EA470 /* Debug */,
-				2A0CBDD4194DA2D7002EA470 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

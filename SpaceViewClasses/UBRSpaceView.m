@@ -15,10 +15,7 @@
 #import <QuartzCore/QuartzCore.h>
 
 
-
 @interface UBRSpaceView () <UIGestureRecognizerDelegate>
-
-@property (nonatomic, strong) NSMutableSet * subviewInfos;
 
 @end
 
@@ -29,8 +26,8 @@
 
 #pragma mark - Life Cycle -
 
-- (instancetype)initWithFrame:(CGRect)frame {
-    
+- (instancetype)initWithFrame:(CGRect)frame
+{
     self = [super initWithFrame:frame];
     if (self) {
         self.damping = 3;
@@ -38,16 +35,13 @@
         self.duration = 0.4;
     }
     return self;
-    
 }
-
-
 
 
 #pragma mark - Interface -
 
-- (void)controlSubview:(UIView *)subview options:(UBRSpaceViewOptions)options {
-
+- (void)controlSubview:(UIView *)subview options:(UBRSpaceViewOptions)options
+{
     if (options & UBRSpaceViewOptionsDraggable) {
         UIPanGestureRecognizer * panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panGestureHandler:)];
         panGesture.delegate = self;
@@ -56,56 +50,51 @@
     }
     
     subview.svInfo = [[UBRSpaceViewInfo alloc] init];
-    subview.svInfo.direction = UBRSpaceViewPositionStart;
+    subview.svInfo.fromPosition = UBRSpaceViewPositionStart;
     [self updateSubview:subview animated:false];
-
 }
 
 
-
-- (void)toggleSubviewPosition:(UIView *)subview animated:(BOOL)animated {
-    
+- (void)toggleSubviewPosition:(UIView *)subview animated:(BOOL)animated
+{
     UBRSpaceViewPosition nextPosition;
-    if (subview.svInfo.direction == UBRSpaceViewPositionStart) {
+    if (subview.svInfo.fromPosition == UBRSpaceViewPositionStart) {
         nextPosition = UBRSpaceViewPositionEnd;
     } else {
         nextPosition = UBRSpaceViewPositionStart;
     }
     
     [self setSubviewPosition:subview position:nextPosition animated:animated];
-    
 }
 
 
-
-- (void)setSubviewPosition:(UIView *)subview position:(UBRSpaceViewPosition)position animated:(BOOL)animated {
-
-    if (position != subview.svInfo.direction) {
+- (void)setSubviewPosition:(UIView *)subview position:(UBRSpaceViewPosition)position animated:(BOOL)animated
+{
+    if (position != subview.svInfo.fromPosition) {
 
         // Call Delegate
         if ([self.delegate respondsToSelector:@selector(spaceView:subview:willTransitFromPosition:)]) {
-            [self.delegate spaceView:self subview:subview willTransitFromPosition:subview.svInfo.direction];
+            [self.delegate spaceView:self subview:subview willTransitFromPosition:subview.svInfo.fromPosition];
         }
 
         // Set And Update
-        subview.svInfo.direction = position;
+        subview.svInfo.fromPosition = position;
         [self updateSubview:subview animated:animated];
     }
-
 }
 
 
-#pragma mark -  Subview Handling -
+#pragma mark - Subview Handling -
 
-- (void)updateSubview:(UIView *)subview  {
-
+- (void)updateSubview:(UIView *)subview
+{
     CGRect nextFrame;
     CGFloat progress = 0;
     
-    if (subview.svInfo.direction == UBRSpaceViewPositionStart) {
+    if (subview.svInfo.fromPosition == UBRSpaceViewPositionStart) {
         nextFrame = [self.delegate spaceView:self startFrameForSubview:subview];
     } else {
-        nextFrame = [self.delegate spaceView:self endFrameForSubview:subview];
+        nextFrame = [self.delegate spaceView:self endFrameForSubview:subview inDirection:subview.svInfo.direction];
         progress = 1;
     }
 
@@ -114,18 +103,16 @@
     }
     
     subview.frame = nextFrame;
-    
 }
 
 
-
-- (void)updateSubview:(UIView *)subview animated:(BOOL)animated {
-
+- (void)updateSubview:(UIView *)subview animated:(BOOL)animated
+{
     // Not Animated?
     if (!animated) {
         [self updateSubview:subview];
         if ([self.delegate respondsToSelector:@selector(spaceView:subview:didTransitToPosition:)]) {
-            [self.delegate spaceView:self subview:subview didTransitToPosition:subview.svInfo.direction];
+            [self.delegate spaceView:self subview:subview didTransitToPosition:subview.svInfo.fromPosition];
         }
         return;
     }
@@ -139,7 +126,7 @@
 
     CGRect startFrame, endFrame, nextFrame;
     startFrame = [self.delegate spaceView:self startFrameForSubview:subview];
-    endFrame = [self.delegate spaceView:self endFrameForSubview:subview];
+    endFrame = [self.delegate spaceView:self endFrameForSubview:subview inDirection:subview.svInfo.direction];
     
     // iOS7 Backward Compability
     if SYSTEM_VERSION_LESS_THAN(@"8.0") {
@@ -152,7 +139,7 @@
         CGFloat distance;
         durationFactor = [self progressForSubview:subview];
         
-        if (subview.svInfo.direction == UBRSpaceViewPositionStart) {
+        if (subview.svInfo.fromPosition == UBRSpaceViewPositionStart) {
             nextFrame = startFrame;
         } else {
             durationFactor = 1 - durationFactor;
@@ -186,32 +173,27 @@
                              }
                          }
                      }];
-    
 }
 
 
 
-
-
 #pragma mark - Gesture Handling -
-
 #pragma mark Pan Gesture
 
-
-- (void)panGestureHandler:(UIPanGestureRecognizer *)panGesture {
-    
+- (void)panGestureHandler:(UIPanGestureRecognizer *)panGesture
+{
     UIView * subview = panGesture.associatedView;
     
     if (panGesture.state == UIGestureRecognizerStateBegan) {
         
         // Call Delegate
         if ([self.delegate respondsToSelector:@selector(spaceView:subview:willTransitFromPosition:)]) {
-            [self.delegate spaceView:self subview:subview willTransitFromPosition:subview.svInfo.direction];
+            [self.delegate spaceView:self subview:subview willTransitFromPosition:subview.svInfo.fromPosition];
         }
 
-        // (Only) based upon frame in superview and the presentatiolayer,
+        // Based upon the frame in the superview and the presentation layer,
         // we can calculate the inner offset at the beginning and save
-        // it relative to the current size
+        // it as relative value to the current subview size
         CGRect frame = [subview.layer.presentationLayer frame];
         CGPoint offsetTouchLocationToCenter = [panGesture locationInView:self];
         CGPoint subviewLocation = UBRCenterForRect(frame);
@@ -220,6 +202,9 @@
         offsetTouchLocationToCenter.x /= frame.size.width;
         offsetTouchLocationToCenter.y /= frame.size.height;
         subview.svInfo.offsetTouchLocationToCenter = offsetTouchLocationToCenter;
+        
+        // Start Location
+        subview.svInfo.startLocation = [panGesture locationInView:self];
 
         // Touching the layer gives all control to the user
         [subview.layer removeAllAnimations];
@@ -233,30 +218,54 @@
         BOOL isDragging = (fabs(velocity.x) > 512 || fabs(velocity.y) > 512);
         
         if (isDragging) {
-            subview.svInfo.direction = subview.svInfo.progressDirection;
+            subview.svInfo.fromPosition = subview.svInfo.positionByProgressChange;
         } else {
             if (subview.svInfo.progress < 0.5) {
-                subview.svInfo.direction = UBRSpaceViewPositionStart;
+                subview.svInfo.fromPosition = UBRSpaceViewPositionStart;
             } else {
-                subview.svInfo.direction = UBRSpaceViewPositionEnd;
+                subview.svInfo.fromPosition = UBRSpaceViewPositionEnd;
             }
         }
         
         [self updateSubview:subview animated:true];
+        subview.svInfo.direction = UBRSpaceViewDirectionnUnknown;
         subview.svInfo.activeGesture = nil;
 
     } else if (panGesture.state == UIGestureRecognizerStateChanged) {
         
+        CGPoint startPosition = subview.svInfo.startLocation;
+        CGPoint position = [panGesture locationInView:subview.superview];
+        CGFloat angle = UBRAngleBetweenPoints(startPosition, position);
+        UBRSpaceViewDirection direction = UBRSpaceViewDirectionnUnknown;
+
+        if (angle >= -4*M_PI_4 && angle < -3*M_PI_4) {
+            direction = UBRSpaceViewDirectionRightHalf | UBRSpaceViewDirectionTopHalf | UBRSpaceViewDirectionTopQuarter;
+        } else if (angle >= -3*M_PI_4 && angle < -2*M_PI_4) {
+            direction = UBRSpaceViewDirectionRightHalf | UBRSpaceViewDirectionTopHalf | UBRSpaceViewDirectionRightQuarter;
+        } else if (angle >= -2*M_PI_4 && angle < -1*M_PI_4) {
+            direction = UBRSpaceViewDirectionRightHalf | UBRSpaceViewDirectionBottomHalf | UBRSpaceViewDirectionRightQuarter;
+        } else if (angle >= -1*M_PI_4 && angle < 0) {
+            direction = UBRSpaceViewDirectionRightHalf | UBRSpaceViewDirectionBottomHalf | UBRSpaceViewDirectionBottomQuarter;
+        } else if (angle >= 0 && angle < 1*M_PI_4) {
+            direction = UBRSpaceViewDirectionLeftHalf | UBRSpaceViewDirectionBottomHalf | UBRSpaceViewDirectionBottomQuarter;
+        } else if (angle >= 1*M_PI_4 && angle < 2*M_PI_4) {
+            direction = UBRSpaceViewDirectionLeftHalf | UBRSpaceViewDirectionBottomHalf | UBRSpaceViewDirectionRightQuarter;
+        } else if (angle >= 2*M_PI_4 && angle < 3*M_PI_4) {
+            direction = UBRSpaceViewDirectionLeftHalf | UBRSpaceViewDirectionTopHalf | UBRSpaceViewDirectionRightQuarter;
+        } else {
+            direction = UBRSpaceViewDirectionLeftHalf | UBRSpaceViewDirectionTopHalf | UBRSpaceViewDirectionTopQuarter;
+        }
+
         CGRect frame = [subview.layer.presentationLayer frame];
         CGPoint offsetTouchLocationToCenter = subview.svInfo.offsetTouchLocationToCenter;
-        CGPoint position = [panGesture locationInView:subview.superview];
         position.x -= (offsetTouchLocationToCenter.x * frame.size.width);
         position.y -= (offsetTouchLocationToCenter.y * frame.size.height);
         
         CGRect  startRect = [self.delegate spaceView:self startFrameForSubview:subview];
-        CGRect  endRect   = [self.delegate spaceView:self endFrameForSubview:subview];
+        CGRect  endRect   = [self.delegate spaceView:self endFrameForSubview:subview inDirection:direction];
         CGFloat progress  = UBRProgressBetweenRects(startRect, endRect, position);
-        subview.svInfo.progress  = progress;
+        subview.svInfo.progress = progress;
+        subview.svInfo.direction = direction;
         
         subview.frame = UBRScaleRect(startRect, endRect, progress);
         if ([self.delegate respondsToSelector:@selector(spaceView:adjustSubview:progress:)]) {
@@ -264,16 +273,13 @@
         }
         
     }
-    
-
 }
-
 
 
 #pragma mark Delegate
 
-- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch {
-    
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch
+{
     UIView * topView;
     for (UIView * aView in self.subviews.reverseObjectEnumerator) {
         if (CGRectContainsPoint(aView.frame, [touch locationInView:self])) {
@@ -289,14 +295,10 @@
     }
     
     return false;
-    
 }
 
 
-
-
 #pragma mark - Helper -
-
 #pragma mark Delegations
 
 - (void)messageDelegateWithSelector:(SEL)selector object:(id)object {
@@ -316,7 +318,7 @@
 
 - (CGFloat)progressForSubview:(UIView *)subview {
     CGRect minRect = [self.delegate spaceView:self startFrameForSubview:subview];
-    CGRect maxRect = [self.delegate spaceView:self endFrameForSubview:subview];
+    CGRect maxRect = [self.delegate spaceView:self endFrameForSubview:subview inDirection:subview.svInfo.direction];
     CGPoint currentPosition = [subview.layer.presentationLayer position];
     return UBRProgressBetweenRects(minRect, maxRect, currentPosition);;
 }
