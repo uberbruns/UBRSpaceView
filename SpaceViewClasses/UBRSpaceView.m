@@ -299,24 +299,10 @@
 
 
 #pragma mark - Helper -
-#pragma mark Delegations
-
-- (void)messageDelegateWithSelector:(SEL)selector object:(id)object {
-    
-    if (!self.delegate) return;
-    #pragma GCC diagnostic ignored "-Warc-performSelector-leaks"
-    if ([self.delegate respondsToSelector:selector]) {
-        [self.delegate performSelector:selector withObject:self withObject:object];
-    }
-    #pragma GCC diagnostic warning "-Warc-performSelector-leaks"
-
-}
-
-
-
 #pragma mark Progress
 
-- (CGFloat)progressForSubview:(UIView *)subview {
+- (CGFloat)progressForSubview:(UIView *)subview
+{
     CGRect minRect = [self.delegate spaceView:self startFrameForSubview:subview];
     CGRect maxRect = [self.delegate spaceView:self endFrameForSubview:subview inDirection:subview.svInfo.direction];
     CGPoint currentPosition = [subview.layer.presentationLayer position];

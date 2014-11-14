@@ -12,11 +12,13 @@
 @implementation UIGestureRecognizer (UBRSpaceView)
 @dynamic associatedView;
 
-- (void)setAssociatedView:(id)object {
+- (void)setAssociatedView:(id)object
+{
     objc_setAssociatedObject(self, @selector(associatedView), object, OBJC_ASSOCIATION_ASSIGN);
 }
 
-- (id)associatedView {
+- (id)associatedView
+{
     return objc_getAssociatedObject(self, @selector(associatedView));
 }
 

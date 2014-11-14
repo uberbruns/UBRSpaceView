@@ -15,19 +15,24 @@
 
 @dynamic svInfo;
 
-- (id)svInfo {
+- (id)svInfo
+{
     return objc_getAssociatedObject(self, @selector(svInfo));
 }
 
-- (void)setSvInfo:(id)object {
+
+- (void)setSvInfo:(id)object
+{
     objc_setAssociatedObject(self, @selector(svInfo), object, OBJC_ASSOCIATION_RETAIN);
 }
 
 @end
 
+
 @implementation UBRSpaceViewInfo
 
-- (void)setProgress:(CGFloat)value {
+- (void)setProgress:(CGFloat)value
+{
     if (fabsf(value - _progress) > 0.01) {
         if (value < _progress) {
             _positionByProgressChange = UBRSpaceViewPositionStart;
@@ -36,7 +41,6 @@
         }
     }
     _progress = value;
-
 }
 
 @end
